@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "NavBar",
+  name: 'NavBar',
 };
 </script>
 
@@ -24,7 +24,7 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Contenu de la navbar -->
-      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-between">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -36,12 +36,7 @@ export default {
         </ul>
         <!-- Barre de recherche centrée -->
         <form class="d-flex mx-auto" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <!-- Icone d'alerte à droite -->
@@ -61,24 +56,21 @@ export default {
 .navbar {
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1000; /* Assure que la navbar est devant les autres éléments */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel: ajout d'une ombre */
-}
-/* Style pour le logo */
-.logo {
-  height: 50px;
-  width: auto;
-}
-/* Centrer la barre de recherche */
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  width: 100%;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%); /* Optionnel: ajout d'une ombre */
 }
 
-/* Ajout de marge pour éviter le chevauchement avec le contenu principal */
-main {
-  padding-top: 70px;
+/* Style pour le logo */
+.logo {
+  width: auto;
+  height: 50px;
+}
+
+/* Centrer la barre de recherche */
+.mx-auto {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>
