@@ -54,16 +54,22 @@ const categories = [
 ];
 </script>
 <template>
-  <div class="d-flex flex-row w-100 align-items-center justify-content-center">
-    <div v-for="(item, index) in categories" :key="index">
-      <button type="button" class="btn large-category m-2" :class="getColor(item)">{{ item.name }}</button>
+  <div class="d-flex flex-row w-100 align-items-center justify-content-start position-relative">
+    <div class="scroll-container">
+      <div class="d-flex flex-row">
+        <div v-for="(item, index) in categories" :key="index">
+          <button type="button" class="btn large-category m-2" :class="getColor(item)">
+            <h4>{{ item.name }}</h4>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .large-category {
-  width: 9em;
+  width: 12em;
   height: 7em;
   text-transform: uppercase;
 }
