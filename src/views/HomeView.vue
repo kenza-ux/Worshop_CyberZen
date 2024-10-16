@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import CategoryButton from '../components/CategoryButton.vue';
+</script>
 
 <template>
   <main>
-    <p>Hello world</p>
+    <div class="w-100 d-flex justify-content-center"><CategoryButton></CategoryButton></div>
   </main>
 </template>

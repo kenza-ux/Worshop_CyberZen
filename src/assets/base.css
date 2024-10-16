@@ -15,6 +15,15 @@
   --vt-c-text-light-2: rgb(60 60 60 / 66%);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgb(235 235 235 / 64%);
+  --theme-color-pink: #d757f6;
+  --theme-color-pale-blue: #75a9f9;
+  --theme-color-green: #629c44;
+  --theme-color-turquoise: #008db1;
+  --theme-color-blue: #0c59cf;
+  --theme-color-red: #dc4c18;
+  --theme-color-purple: #7e2199;
+  --theme-color-dark-purple: #5125ad;
+  --theme-color-yellow: #ffc957;
 }
 
 /* semantic color variables for this project */
@@ -52,14 +61,63 @@
 
 body {
   min-height: 100vh;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
   font-size: 15px;
   line-height: 1.6;
   color: var(--color-text);
   background: var(--color-background);
-  transition: color 0.5s, background-color 0.5s;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.blue-button-color {
+  background-color: var(--theme-color-blue) !important;
+  color: white !important;
+}
+.turquoise-button-color {
+  background-color: var(--theme-color-turquoise) !important;
+  color: white !important;
+}
+.red-button-color {
+  background-color: var(--theme-color-red) !important;
+  color: white !important;
+}
+.green-button-color {
+  background-color: var(--theme-color-green) !important;
+  color: white !important;
+}
+.pink-button-color {
+  background-color: var(--theme-color-pink) !important;
+  color: white !important;
+}
+.yellow-button-color {
+  background-color: var(--theme-color-yellow) !important;
+  color: white !important;
+}
+.pale-blue-button-color {
+  background-color: var(--theme-color-pale-blue) !important;
+  color: white !important;
+}
+.purple-button-color {
+  background-color: var(--theme-color-purple) !important;
+  color: white !important;
+}
+.dark-purple-button-color {
+  background-color: var(--theme-color-dark-purple) !important;
+  color: white !important;
 }
