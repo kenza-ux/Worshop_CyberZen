@@ -1,7 +1,10 @@
 <script setup>
+import { ref } from 'vue';
 import CategoryButton from '../components/CategoryButton.vue';
 import Trends from '../components/Trends.vue';
-const articles = [
+import Multiselect from '@vueform/multiselect';
+
+const articles = ref([
   {
     name: 'Juridique',
     id: 1,
@@ -47,8 +50,21 @@ const articles = [
     id: 9,
     categories: [{ name: 'juridique' }, { name: 'article' }],
   },
+]);
+
+const uniqueCategories = ref([]);
+uniqueCategories.value = [
+  ...new Set(articles.value.flatMap((article) => article.categories.map((category) => category.name))),
 ];
+const value = ref([]);
+const filteredArticles = computed(() => {
+  if (value.value.length === 0) {
+    return articles.value; // No filter applied
+  }
+  return articles.value.filter((article) => article.categories.some((category) => value.value.includes(category.name)));
+});
 </script>
+
 <template>
   <main>
     <div class="w-70 ms-5 me-5">
@@ -60,11 +76,25 @@ const articles = [
       </div>
       <hr />
       <div class="w-100 pt-4 pb-4">
-        <h2 class="ms-5 mb-5"># Les tendances</h2>
+        <div class="d-flex flex-row justify-content-between w-100">
+          <h2 class="ms-5 mb-5"># Les tendances</h2>
+          <div class="w-25">
+            <Multiselect
+              v-model="value"
+              mode="tags"
+              placeholder="Choisissez des filtres"
+              :close-on-select="false"
+              :options="uniqueCategories"
+              :searchable="true"
+            />
+          </div>
+        </div>
         <div class="d-flex justify-content-center">
-          <Trends :articles="articles"></Trends>
+          <Trends :articles="filteredArticles"></Trends>
         </div>
       </div>
     </div>
   </main>
 </template>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
