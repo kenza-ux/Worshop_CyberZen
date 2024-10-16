@@ -1,7 +1,8 @@
-<script>
-export default {
-  name: 'NavBar',
-};
+<script setup>
+import { ref } from 'vue';
+import AlerteButton from './AlerteButton.vue';
+
+const showAlerteModal = ref(false);
 </script>
 
 <template>
@@ -46,14 +47,16 @@ export default {
 
         </form>
         <!-- Icone d'alerte à droite -->
+        <button @click="showAlerteModal = true" class="navbar-brand">
+          <img src="@/assets/logo_alerte.png" alt="Alerte" class="logo" />
+        </button>
         <a class="navbar-brand" href="/">
-          <img src="@/assets/logo_alerte.png" alt="Logo" class="logo" />
-        </a>
-        <a class="navbar-brand" href="/">
-          <img src="@/assets/icone_avatar.png" alt="Logo" class="logo" />
+          <img src="@/assets/icone_avatar.png" alt="Avatar" class="logo" />
         </a>
       </div>
     </div>
+    <!-- Inclusion du composant modal -->
+    <AlerteButton v-if="showAlerteModal" @close="showAlerteModal = false" />
   </nav>
 </template>
 
