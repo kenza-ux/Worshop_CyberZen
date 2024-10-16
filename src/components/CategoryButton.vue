@@ -1,19 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { getColor } from '../shared/common.js';
-defineProps({});
-
-const categories = [
-  { name: 'Juridique' },
-  { name: 'Secu' },
-  { name: 'Guide' },
-  { name: 'Quiz' },
-  { name: 'Article' },
-  { name: 'Anonymat' },
-  { name: 'Enfant' },
-  { name: 'Ado' },
-  { name: 'Adulte' },
-];
+defineProps({ categories: Object });
 
 const scrollContainer = ref(null);
 const canScrollLeft = ref(false);

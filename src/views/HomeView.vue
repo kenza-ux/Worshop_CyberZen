@@ -8,58 +8,73 @@ const articles = ref([
   {
     name: 'Juridique',
     id: 1,
-    categories: [{ name: 'juridique' }, { name: 'secu' }, { name: 'anonymat' }, { name: 'guide' }],
+    categories: [
+      { name: 'juridique', theme: true },
+      { name: 'secu', theme: true },
+      { name: 'anonymat' },
+      { name: 'guide' },
+    ],
   },
   {
     name: 'Secu',
     id: 2,
-    categories: [{ name: 'juridique' }, { name: 'secu' }, { name: 'anonymat' }, { name: 'guide' }],
+    categories: [
+      { name: 'juridique', theme: true },
+      { name: 'secu', theme: true },
+      { name: 'anonymat' },
+      { name: 'guide' },
+    ],
   },
   {
     name: 'Guide',
     id: 3,
-    categories: [{ name: 'juridique' }, { name: 'guide' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
   },
   {
     name: 'Quiz',
     id: 4,
-    categories: [{ name: 'juridique' }, { name: 'guide' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
   },
   {
     name: 'Article',
     id: 5,
-    categories: [{ name: 'juridique' }, { name: 'secu' }, { name: 'article' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'secu', theme: true }, { name: 'article' }],
   },
   {
     name: 'Anonymat',
     id: 6,
-    categories: [{ name: 'juridique' }, { name: 'guide' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
   },
   {
     name: 'Enfant',
     id: 7,
-    categories: [{ name: 'juridique' }, { name: 'article' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'article' }],
   },
   {
     name: 'Ado',
     id: 8,
-    categories: [{ name: 'secu' }, { name: 'quiz' }],
+    categories: [{ name: 'secu', theme: true }, { name: 'quiz' }],
   },
   {
     name: 'Adulte',
     id: 9,
-    categories: [{ name: 'juridique' }, { name: 'article' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'article' }],
   },
 ]);
 
 const uniqueCategories = ref([]);
-uniqueCategories.value = [
-  ...new Set(articles.value.flatMap((article) => article.categories.map((category) => category.name))),
-];
+uniqueCategories.value = Object.values(
+  articles.value.reduce((acc, article) => {
+    article.categories.forEach((category) => {
+      acc[category.name] = category;
+    });
+    return acc;
+  }, {}),
+);
 const value = ref([]);
 const filteredArticles = computed(() => {
   if (value.value.length === 0) {
-    return articles.value; // No filter applied
+    return articles.value;
   }
   return articles.value.filter((article) => article.categories.some((category) => value.value.includes(category.name)));
 });
@@ -71,7 +86,7 @@ const filteredArticles = computed(() => {
       <div class="w-100 pt-4 pb-4">
         <h2 class="ms-5 mb-5"># Les catégories</h2>
         <div class="d-flex justify-content-center">
-          <CategoryButton></CategoryButton>
+          <CategoryButton :categories="uniqueCategories"></CategoryButton>
         </div>
       </div>
       <hr />
@@ -84,7 +99,7 @@ const filteredArticles = computed(() => {
               mode="tags"
               placeholder="Choisissez des filtres"
               :close-on-select="false"
-              :options="uniqueCategories"
+              :options="uniqueCategories.map((cat) => cat.name)"
               :searchable="true"
             />
           </div>

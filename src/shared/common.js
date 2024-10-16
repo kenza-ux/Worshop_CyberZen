@@ -1,5 +1,8 @@
 export const getColor = (category) => {
   let color = '';
+  if (category == null) {
+    return;
+  }
   switch (category.name.toLowerCase()) {
     case 'quiz':
       color = 'purple';
