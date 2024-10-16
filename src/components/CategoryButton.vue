@@ -99,7 +99,7 @@ onMounted(() => {
     <div ref="scrollContainer" class="scroll-container">
       <div class="d-flex flex-row">
         <div v-for="(item, index) in categories" :key="index">
-          <button type="button" class="btn large-category m-2" :class="getColor(item)">
+          <button type="button" class="btn large-category m-4" :class="getColor(item)">
             <h4>{{ item.name }}</h4>
           </button>
         </div>
