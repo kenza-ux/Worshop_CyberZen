@@ -1,43 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-
+import { getColor } from '../shared/common.js';
 defineProps({});
-
-const getColor = (category) => {
-  let color = '';
-  switch (category.name.toLowerCase()) {
-    case 'quiz':
-      color = 'purple';
-      break;
-    case 'juridique':
-      color = 'green';
-      break;
-    case 'secu':
-      color = 'red';
-      break;
-    case 'anonymat':
-      color = 'blue';
-      break;
-    case 'article':
-      color = 'turquoise';
-      break;
-    case 'guide':
-      color = 'pale-blue';
-      break;
-    case 'enfant':
-      color = 'pink';
-      break;
-    case 'ado':
-      color = 'yellow';
-      break;
-    case 'adulte':
-      color = 'dark-purple';
-      break;
-    default:
-      break;
-  }
-  return color + '-button-color';
-};
 
 const categories = [
   { name: 'Juridique' },
