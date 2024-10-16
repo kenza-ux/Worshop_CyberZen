@@ -8,7 +8,7 @@ import { getArticles } from '../api/articles.js';
 const loading = ref(false);
 const articles = ref([]);
 const uniqueCategories = ref([]);
-const selectedCategories = ref([]); // Changed from 'value' to 'selectedCategories' for clarity
+const selectedCategories = ref([]);
 
 onMounted(async () => {
   loading.value = true;
@@ -56,7 +56,7 @@ const filteredArticles = computed(() => {
           <h2 class="ms-5 mb-5"># Les tendances</h2>
           <div class="w-25">
             <Multiselect
-              v-model="value"
+              v-model="selectedCategories"
               mode="tags"
               placeholder="Choisissez des filtres"
               :close-on-select="false"
