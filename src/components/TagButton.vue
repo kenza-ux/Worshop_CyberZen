@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
+import { getColor } from '../shared/common.js';
 
 defineProps({
   category: Object,
@@ -7,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <span class="badge bg-primary m-1 badge-size p-3 d-flex align-items-center justify-content-center">
+  <span class="badge m-1 badge-size p-3 d-flex align-items-center justify-content-center" :class="getColor(category)">
     {{ category.name }}
   </span>
 </template>
