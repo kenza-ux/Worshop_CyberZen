@@ -27,7 +27,7 @@ export default {
       <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-between">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
 
           <li class="nav-item">
@@ -36,8 +36,14 @@ export default {
         </ul>
         <!-- Barre de recherche centrée -->
         <form class="d-flex mx-auto" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="saisissez un mot clé"
+            aria-label="search"
+          />
+          <button class="btn btn-outline-success" type="submit">Chercher</button>
+
         </form>
         <!-- Icone d'alerte à droite -->
         <a class="navbar-brand" href="/">
