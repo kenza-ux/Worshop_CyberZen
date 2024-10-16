@@ -1,88 +1,49 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import CategoryButton from '../components/CategoryButton.vue';
 import Trends from '../components/Trends.vue';
 import Multiselect from '@vueform/multiselect';
+import { getArticles } from '../api/articles.js';
 
-const articles = ref([
-  {
-    name: 'Juridique',
-    id: 1,
-    categories: [
-      { name: 'juridique', theme: true },
-      { name: 'secu', theme: true },
-      { name: 'anonymat' },
-      { name: 'guide' },
-    ],
-  },
-  {
-    name: 'Secu',
-    id: 2,
-    categories: [
-      { name: 'juridique', theme: true },
-      { name: 'secu', theme: true },
-      { name: 'anonymat' },
-      { name: 'guide' },
-    ],
-  },
-  {
-    name: 'Guide',
-    id: 3,
-    categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
-  },
-  {
-    name: 'Quiz',
-    id: 4,
-    categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
-  },
-  {
-    name: 'Article',
-    id: 5,
-    categories: [{ name: 'juridique', theme: true }, { name: 'secu', theme: true }, { name: 'article' }],
-  },
-  {
-    name: 'Anonymat',
-    id: 6,
-    categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
-  },
-  {
-    name: 'Enfant',
-    id: 7,
-    categories: [{ name: 'juridique', theme: true }, { name: 'article' }],
-  },
-  {
-    name: 'Ado',
-    id: 8,
-    categories: [{ name: 'secu', theme: true }, { name: 'quiz' }],
-  },
-  {
-    name: 'Adulte',
-    id: 9,
-    categories: [{ name: 'juridique', theme: true }, { name: 'article' }],
-  },
-]);
-
+const loading = ref(false);
+const articles = ref([]);
 const uniqueCategories = ref([]);
-uniqueCategories.value = Object.values(
-  articles.value.reduce((acc, article) => {
+const selectedCategories = ref([]); // Changed from 'value' to 'selectedCategories' for clarity
+
+onMounted(async () => {
+  loading.value = true;
+  articles.value = await getArticles();
+
+  const categoryMap = articles.value.reduce((acc, article) => {
     article.categories.forEach((category) => {
       acc[category.name] = category;
     });
     return acc;
-  }, {}),
-);
-const value = ref([]);
+  }, {});
+
+  uniqueCategories.value = Object.values(categoryMap);
+  loading.value = false;
+});
+
 const filteredArticles = computed(() => {
-  if (value.value.length === 0) {
+  if (selectedCategories.value.length === 0) {
     return articles.value;
   }
-  return articles.value.filter((article) => article.categories.some((category) => value.value.includes(category.name)));
+  return articles.value.filter((article) =>
+    article.categories.some((category) => selectedCategories.value.includes(category.name)),
+  );
 });
 </script>
 
 <template>
   <main>
-    <div class="w-70 ms-5 me-5">
+    <div v-if="loading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div v-else class="w-70 ms-5 me-5">
       <div class="w-100 pt-4 pb-4">
         <h2 class="ms-5 mb-5"># Les catégories</h2>
         <div class="d-flex justify-content-center">
@@ -104,12 +65,10 @@ const filteredArticles = computed(() => {
             />
           </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <Trends :articles="filteredArticles"></Trends>
-        </div>
+
+        <Trends :articles="filteredArticles"></Trends>
       </div>
     </div>
   </main>
 </template>
-
 <style src="@vueform/multiselect/themes/default.css"></style>
