@@ -1,12 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-});
+defineProps({});
 
 const getColor = (category) => {
   let color = '';
@@ -45,15 +40,15 @@ const getColor = (category) => {
 };
 
 const categories = [
-  { name: 'Juridique', id: 1 },
-  { name: 'Secu', id: 2 },
-  { name: 'Guide', id: 3 },
-  { name: 'Quiz', id: 4 },
-  { name: 'Article', id: 5 },
-  { name: 'Anonymat', id: 6 },
-  { name: 'Enfant', id: 7 },
-  { name: 'Ado', id: 8 },
-  { name: 'Adulte', id: 9 },
+  { name: 'Juridique' },
+  { name: 'Secu' },
+  { name: 'Guide' },
+  { name: 'Quiz' },
+  { name: 'Article' },
+  { name: 'Anonymat' },
+  { name: 'Enfant' },
+  { name: 'Ado' },
+  { name: 'Adulte' },
 ];
 
 const scrollContainer = ref(null);
