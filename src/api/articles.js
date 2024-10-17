@@ -25,32 +25,32 @@ export async function getArticles() {
         {
           name: 'Guide',
           id: 3,
-          categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
+          categories: [{ name: 'anonymat', theme: true }, { name: 'guide' }],
         },
         {
           name: 'Quiz',
           id: 4,
-          categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
+          categories: [{ name: 'juridique', theme: true }, { name: 'guide' }, { name: 'enfant' }],
         },
         {
           name: 'Article',
           id: 5,
-          categories: [{ name: 'juridique', theme: true }, { name: 'secu', theme: true }, { name: 'article' }],
+          categories: [{ name: 'juridique', theme: true }, { name: 'secu', theme: true }, { name: 'article' },{ name: 'adulte' }],
         },
         {
           name: 'Anonymat',
           id: 6,
-          categories: [{ name: 'juridique', theme: true }, { name: 'guide' }],
+          categories: [{ name: 'juridique', theme: true }, { name: 'guide' }, { name: 'ado' }],
         },
         {
-          name: 'Enfant',
+          name: 'proteger son enfant',
           id: 7,
-          categories: [{ name: 'juridique', theme: true }, { name: 'article' }],
+          categories: [{ name: 'juridique', theme: true }, { name: 'article' }, { name: 'adulte' }],
         },
         {
           name: 'Ado',
           id: 8,
-          categories: [{ name: 'secu', theme: true }, { name: 'quiz' }],
+          categories: [{ name: 'secu', theme: true }, { name: 'quiz' }, { name: 'ado' }],
         },
         {
           name: 'Adulte',

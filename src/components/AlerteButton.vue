@@ -43,15 +43,18 @@
           </button>
         </div>
 
-        <!-- Ligne de séparation -->
-        <hr>
-
-        <!-- Espace des liens filtrés -->
-        <div v-if="currentQuestionIndex === questions.length - 1">
+        <hr />
+        <!-- Recommandations d'articles -->
+        <div v-if="recommendedArticles.length">
           <h3>Articles recommandés :</h3>
-          <ul class="article-list">
-            <li v-for="(article, index) in filteredArticles" :key="index">
-              <a :href="article.url">{{ article.title }}</a> - <span class="tag">{{ article.tag }}</span>
+          <ul>
+            <li v-for="article in recommendedArticles" :key="article.id">
+              <a :href="'/articles/' + article.id">{{ article.name }}</a>
+              <span class="tags">
+                <span v-for="category in article.categories" :key="category.name" class="tag">
+                  {{ category.name }}
+                </span>
+              </span>
             </li>
           </ul>
         </div>
@@ -60,10 +63,9 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref } from 'vue';
-import { defineEmits } from 'vue';
+import { ref, onMounted } from 'vue';
+import { getArticles } from '@/api/articles.js'; // Importation de getArticles
 
 // Gestion de l'émission de l'événement pour fermer le modal
 const emit = defineEmits(['close']);
@@ -79,7 +81,7 @@ const questions = ref([
   },
   {
     text: "Quelle est votre situation actuelle ?",
-    options: ["Étudiant", "Travailleur", "Sans emploi"]
+    options: ["vol d'identité", "cyber harcèlement ", "autre"]
   },
   {
     text: "Où habitez-vous ?",
@@ -94,34 +96,8 @@ const currentQuestion = ref(questions.value[currentQuestionIndex.value]);
 // Suivi des réponses sélectionnées
 const answers = ref([]);
 
-// Liste d'articles avec leurs tags associés
-const articles = ref([
-  { title: "Guide pour les jeunes", url: "/articles/jeunes", tag: "Jeune" },
-  { title: "Conseils pour travailleurs", url: "/articles/travailleurs", tag: "Travailleur" },
-  { title: "Support pour sans emploi", url: "/articles/sans-emploi", tag: "Sans Emploi" },
-  { title: "Vivre en milieu urbain", url: "/articles/urbain", tag: "Urbain" },
-  { title: "Aides en milieu rural", url: "/articles/rural", tag: "Rural" }
-]);
-
-// Filtrer les articles en fonction des réponses
-const filteredArticles = ref([]);
-
-const filterArticles = () => {
-  const ageGroup = answers.value[0];
-  const situation = answers.value[1];
-  const location = answers.value[2];
-
-  // Filtrer les articles selon les réponses (exemple simple)
-  filteredArticles.value = articles.value.filter(article => {
-    return (
-      (ageGroup === "Moins de 18 ans" && article.tag === "Jeune") ||
-      (situation === "Travailleur" && article.tag === "Travailleur") ||
-      (situation === "Sans emploi" && article.tag === "Sans Emploi") ||
-      (location === "Région urbaine" && article.tag === "Urbain") ||
-      (location === "Région rurale" && article.tag === "Rural")
-    );
-  });
-};
+// Articles recommandés
+const recommendedArticles = ref([]);
 
 // Fonction pour enregistrer une réponse et passer à la question suivante
 const selectOption = (option) => {
@@ -135,8 +111,7 @@ const nextQuestion = () => {
     currentQuestionIndex.value++;
     currentQuestion.value = questions.value[currentQuestionIndex.value];
   } else {
-    // Filtrer les articles une fois les questions terminées
-    filterArticles();
+    fetchRecommendedArticles();
   }
 };
 
@@ -147,8 +122,18 @@ const previousQuestion = () => {
     currentQuestion.value = questions.value[currentQuestionIndex.value];
   }
 };
-</script>
 
+// Récupérer les articles et filtrer selon les réponses
+const fetchRecommendedArticles = async () => {
+  const articles = await getArticles();
+  // Filtrage des articles basés sur les réponses
+  recommendedArticles.value = articles.filter(article =>
+    article.categories.some(category =>
+      answers.value.includes(category.name)
+    )
+  );
+};
+</script>
 
 <style scoped>
 .modal-backdrop {
@@ -215,5 +200,27 @@ const previousQuestion = () => {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.tags {
+  margin-left: 10px;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 4px;
+  font-size: 0.8rem;
 }
 </style>
