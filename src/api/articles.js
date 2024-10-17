@@ -102,3 +102,11 @@ export async function getArticleById(id) {
     }, 1000);
   });
 }
+
+export async function getArticlesByCategory(categoryFilter) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(allArticles.filter((article) => article.categories.some((category) => category.name === categoryFilter)));
+    }, 1000);
+  });
+}

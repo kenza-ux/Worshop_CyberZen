@@ -1,34 +1,38 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import CategoryButton from '../components/CategoryButton.vue';
 import AllCategoryContent from '../components/AllCategoryContent.vue';
 import Multiselect from '@vueform/multiselect';
-import { getArticles } from '../api/articles.js';
+import { getArticlesByCategory } from '../api/articles.js';
 
 const loading = ref(false);
 const articles = ref([]);
 const uniqueCategories = ref([]);
 const selectedCategories = ref([]);
 
-onMounted(async () => {
-  loading.value = true;
-  articles.value = await getArticles();
-  if (articles.value.length > 0) {
-    const categoryMap = articles.value.reduce((acc, article) => {
-      article.categories.forEach((category) => {
-        if (category.theme == true) {
-          return;
-        }
-        acc[category.name] = category;
-      });
-      return acc;
-    }, {});
+const route = useRoute();
+const filterCategory = ref(null);
 
-    uniqueCategories.value = Object.values(categoryMap);
-  }
+watch(
+  () => route.params.category,
+  async (category) => {
+    loading.value = true;
+    filterCategory.value = category;
+    articles.value = await getArticlesByCategory(filterCategory.value);
+    if (articles.value.length > 0) {
+      const categoryMap = articles.value.reduce((acc, article) => {
+        article.categories.forEach((category) => {
+          acc[category.name] = category;
+        });
+        return acc;
+      }, {});
 
-  loading.value = false;
-});
+      uniqueCategories.value = Object.values(categoryMap);
+    }
+
+    loading.value = false;
+  },
+  { immediate: true },
+);
 
 const filteredArticles = computed(() => {
   if (selectedCategories.value.length === 0) {
@@ -49,17 +53,10 @@ const filteredArticles = computed(() => {
     </div>
 
     <div v-else class="w-70 ms-5 me-5">
-      <div v-if="articles && articles.length > 0">
-        <div class="w-100 pt-4 pb-4">
-          <h2 class="ms-5 mb-5"># Les catégories</h2>
-          <div class="d-flex justify-content-center">
-            <CategoryButton :categories="uniqueCategories"></CategoryButton>
-          </div>
-        </div>
-        <hr />
+      <div v-if="filteredArticles && filteredArticles.length > 0">
         <div class="w-100 pt-4 pb-4">
           <div class="d-flex flex-row justify-content-between w-100">
-            <h2 class="ms-5 mb-5"># Les tendances</h2>
+            <h2 class="ms-5 mb-5"># {{ filterCategory }}</h2>
             <div class="w-25">
               <Multiselect
                 v-model="selectedCategories"

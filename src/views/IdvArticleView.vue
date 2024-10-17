@@ -21,7 +21,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="isLoading" class="w-100 d-flex justify-content-center">
+  <div v-if="isLoading" class="w-100 h-100 d-flex justify-content-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Chargement...</span>
     </div>
