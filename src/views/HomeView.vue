@@ -37,9 +37,9 @@ const filteredArticles = computed(() => {
 
 <template>
   <main>
-    <div v-if="loading" class="d-flex justify-content-center">
+    <div v-if="loading" class="w-100 d-flex justify-content-center">
       <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden">Chargement...</span>
       </div>
     </div>
 
