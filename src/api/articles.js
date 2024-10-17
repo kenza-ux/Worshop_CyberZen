@@ -1,7 +1,4 @@
-export async function getArticles() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
+const allArticles = [
         {
           name: 'Juridique',
           id: 1,
@@ -57,7 +54,14 @@ export async function getArticles() {
           id: 9,
           categories: [{ name: 'juridique', theme: true }, { name: 'article' }],
         },
-      ]);
+];
+export async function getArticles() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(allArticles);
     }, 1000);
   });
 }
+
+
+export async function getArticleById() {}
