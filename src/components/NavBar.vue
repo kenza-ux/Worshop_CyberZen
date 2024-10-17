@@ -47,9 +47,9 @@ const showAlerteModal = ref(false);
 
         </form>
         <!-- Icone d'alerte à droite -->
-        <button @click="showAlerteModal = true" class="navbar-brand">
+        <a @click="showAlerteModal = true" class="navbar-brand alerte-icon">
           <img src="@/assets/logo_alerte.png" alt="Alerte" class="logo" />
-        </button>
+        </a>
         <a class="navbar-brand" href="/">
           <img src="@/assets/icone_avatar.png" alt="Avatar" class="logo" />
         </a>
@@ -82,4 +82,12 @@ const showAlerteModal = ref(false);
   margin-right: auto;
   margin-left: auto;
 }
+.alerte-icon {
+  cursor: pointer; /* Change le curseur pour montrer que c'est cliquable */
+}
+
+.alerte-icon:hover {
+  opacity: 0.8; /* Optionnel : effet visuel quand la souris passe dessus */
+}
+
 </style>

@@ -45,7 +45,10 @@
           <h3>Articles recommandés :</h3>
           <ul>
             <li v-for="article in recommendedArticles" :key="article.id">
-              <a :href="article.source">{{ article.name }}</a>
+              <!-- Utilisation de router-link pour chaque article -->
+              <router-link :to="`/article/${article.id}`" class="article-link">
+                {{ article.name }}
+              </router-link>
               <span class="tags">
                 <TagButton v-for="category in article.categories" :key="category.name" :category="category" />
               </span>

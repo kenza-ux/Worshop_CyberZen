@@ -22,7 +22,7 @@ const allArticles = [
   { name: 'juridique', theme: true },
   { name: 'secu', theme: true },
   { name: 'anonymat' },
-  { name: 'guide' },
+  { name: 'article' },
 ],
 },
 {
@@ -44,7 +44,7 @@ const allArticles = [
   keywords: ['quiz', 'vol d’identité', 'protection'],
   categories: [
   { name: 'juridique', theme: true },
-  { name: 'guide' },
+  { name: 'quiz' },
   { name: 'enfant' },
 ],
 },
@@ -104,7 +104,7 @@ const allArticles = [
   keywords: ['identité', 'enfants', 'protection'],
   categories: [
   { name: 'anonymat', theme: true },
-  { name: 'enfant' },
+  { name: 'article' }, { name: 'enfant' }
 ],
 },
 {
@@ -127,7 +127,7 @@ const allArticles = [
   keywords: ['cyberharcèlement', 'conséquences', 'éducation'],
   categories: [
   { name: 'secu', theme: true },
-  { name: 'guide' },
+  { name: 'article' },
   { name: 'ado' },
 ],
 },
@@ -139,7 +139,7 @@ const allArticles = [
   keywords: ['addiction', 'réseaux sociaux', 'prévention'],
   categories: [
   { name: 'secu', theme: true },
-  { name: 'guide' },
+  { name: 'article' },
   { name: 'ado' },
 ],
 },
@@ -203,14 +203,14 @@ const allArticles = [
 ],
 },
 {
-  name: 'La désinformation en ligne : Comment s’en protéger ?',
+  name: 'Quiz: La désinformation en ligne : Comment s’en protéger ?',
     id: 22,
   source: 'https://adulteducation.com/disinformation',
   author: 'Linda Scott',
   keywords: ['désinformation', 'protection', 'adultes'],
   categories: [
   { name: 'secu', theme: true },
-  { name: 'guide' },
+  { name: 'quiz' },
   { name: 'adulte' },
 ],
 },
