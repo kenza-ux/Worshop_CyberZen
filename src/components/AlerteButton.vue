@@ -4,14 +4,12 @@
       <button class="close-button" @click="closeModal">X</button>
       <div class="modal-body">
         <h2 class="modal-title">#Alerte / aide d'urgence</h2>
-        <hr>
+        <hr />
         <p class="intro-text">Bonjour, afin de mieux vous guider, répondez aux questions :</p>
 
-        <!-- Affichage de la question actuelle -->
         <div class="question-container">
           <p>{{ currentQuestion.text }}</p>
 
-          <!-- Affichage des options sous forme de boutons -->
           <div class="options">
             <button
               v-for="(option, index) in currentQuestion.options"
@@ -25,7 +23,6 @@
           </div>
         </div>
 
-        <!-- Boutons de navigation Back/Next -->
         <div class="navigation-buttons">
           <button
             v-if="currentQuestionIndex > 0"
@@ -44,16 +41,13 @@
         </div>
 
         <hr />
-        <!-- Recommandations d'articles -->
         <div v-if="recommendedArticles.length">
           <h3>Articles recommandés :</h3>
           <ul>
             <li v-for="article in recommendedArticles" :key="article.id">
-              <a :href="'/articles/' + article.id">{{ article.name }}</a>
+              <a :href="article.source">{{ article.name }}</a>
               <span class="tags">
-                <span v-for="category in article.categories" :key="category.name" class="tag">
-                  {{ category.name }}
-                </span>
+                <TagButton v-for="category in article.categories" :key="category.name" :category="category" />
               </span>
             </li>
           </ul>
@@ -65,57 +59,124 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getArticles } from '@/api/articles.js'; // Importation de getArticles
+import { getArticles } from '@/api/articles.js';
+import TagButton from './TagButton.vue'; // Assurez-vous de modifier le chemin en fonction de votre structure de fichiers.
 
-// Gestion de l'émission de l'événement pour fermer le modal
 const emit = defineEmits(['close']);
 const closeModal = () => {
   emit('close');
 };
 
-// Liste des questions et des réponses possibles
+// Questions relatives aux dangers des réseaux sociaux
 const questions = ref([
   {
     text: "Quelle est votre tranche d'âge ?",
-    options: ["Moins de 18 ans", "18-35 ans", "Plus de 35 ans"]
+    options: ["Moins de 15 ans", "15-20 ans", "Plus de 20 ans"]
   },
   {
-    text: "Quelle est votre situation actuelle ?",
-    options: ["vol d'identité", "cyber harcèlement ", "autre"]
+    text: "Avez-vous été victime de cyberharcèlement ?",
+    options: ["Oui", "Non"]
   },
   {
-    text: "Où habitez-vous ?",
-    options: ["Région urbaine", "Région rurale", "Autre"]
+    text: "Avez-vous reçu des menaces ou des messages inappropriés ?",
+    options: ["Oui", "Non"]
+  },
+  {
+    text: "Pensez-vous que votre compte a été piraté ou usurpé ?",
+    options: ["Oui", "Non"]
+  },
+  {
+    text: "Souhaitez-vous signaler un contenu inapproprié sur les réseaux sociaux ?",
+    options: ["Oui", "Non"]
+  },
+  {
+    text: "Avez-vous besoin d'informations sur la manière de protéger votre identité en ligne ?",
+    options: ["Oui", "Non"]
+  },
+  {
+    text: "Êtes-vous à la recherche de ressources pour parler à un adulte de votre situation ?",
+    options: ["Oui", "Non"]
+  },
+  {
+    text: "Avez-vous des préoccupations concernant l'addiction aux réseaux sociaux ?",
+    options: ["Oui", "Non"]
   }
 ]);
 
-// Suivi de la question actuelle
 const currentQuestionIndex = ref(0);
 const currentQuestion = ref(questions.value[currentQuestionIndex.value]);
-
-// Suivi des réponses sélectionnées
 const answers = ref([]);
-
-// Articles recommandés
 const recommendedArticles = ref([]);
+const accumulatedKeywords = ref(new Set());
 
-// Fonction pour enregistrer une réponse et passer à la question suivante
-const selectOption = (option) => {
-  answers.value[currentQuestionIndex.value] = option;
-  nextQuestion();
+const filterArticles = (articles) => {
+  const keywordsArray = Array.from(accumulatedKeywords.value);
+  const isChild = answers.value[0] === "Moins de 15 ans";
+
+  recommendedArticles.value = articles.filter(article => {
+    // Pour les enfants, ne garder que les articles de la catégorie "enfant"
+    if (isChild && !article.categories.some(category => category.name === 'enfant')) {
+      return false;
+    }
+
+    // Pour les adolescents et adultes, filtrer par mots-clés
+    const hasKeywords = keywordsArray.length === 0 ||
+      keywordsArray.some(keyword => article.keywords.includes(keyword));
+
+    return hasKeywords;
+  });
 };
 
-// Fonction pour passer à la question suivante
-const nextQuestion = () => {
+const selectOption = async (option) => {
+  answers.value[currentQuestionIndex.value] = option;
+
+  // Ajout des mots-clés en fonction de la réponse
+  if (currentQuestionIndex.value === 0) {
+    if (option === "Moins de 15 ans") {
+      accumulatedKeywords.value.add('jeune');
+    } else if (option === "15-20 ans") {
+      accumulatedKeywords.value.add('ado');
+    } else {
+      accumulatedKeywords.value.add('adulte');
+    }
+  }
+
+  if (option === "Oui") {
+    switch (currentQuestionIndex.value) {
+      case 1:
+        accumulatedKeywords.value.add('cyberharcèlement');
+        break;
+      case 2:
+        accumulatedKeywords.value.add('menaces');
+        break;
+      case 3:
+        accumulatedKeywords.value.add('usurpation');
+        break;
+      case 4:
+        accumulatedKeywords.value.add('signalement');
+        break;
+      case 5:
+        accumulatedKeywords.value.add('protection');
+        break;
+      case 6:
+        accumulatedKeywords.value.add('ressources');
+        break;
+      case 7:
+        accumulatedKeywords.value.add('addiction');
+        break;
+    }
+  }
+
+  // Récupérer et filtrer les articles
+  const articles = await getArticles();
+  filterArticles(articles);
+
   if (currentQuestionIndex.value < questions.value.length - 1) {
     currentQuestionIndex.value++;
     currentQuestion.value = questions.value[currentQuestionIndex.value];
-  } else {
-    fetchRecommendedArticles();
   }
 };
 
-// Fonction pour revenir à la question précédente
 const previousQuestion = () => {
   if (currentQuestionIndex.value > 0) {
     currentQuestionIndex.value--;
@@ -123,16 +184,10 @@ const previousQuestion = () => {
   }
 };
 
-// Récupérer les articles et filtrer selon les réponses
-const fetchRecommendedArticles = async () => {
+onMounted(async () => {
   const articles = await getArticles();
-  // Filtrage des articles basés sur les réponses
-  recommendedArticles.value = articles.filter(article =>
-    article.categories.some(category =>
-      answers.value.includes(category.name)
-    )
-  );
-};
+  recommendedArticles.value = articles;
+});
 </script>
 
 <style scoped>
@@ -193,7 +248,7 @@ const fetchRecommendedArticles = async () => {
 }
 
 .selected {
-  background-color: lightgreen; /* Couleur pour indiquer la sélection */
+  background-color: lightgreen;
 }
 
 .navigation-buttons {
@@ -212,15 +267,9 @@ li {
 }
 
 .tags {
-  margin-left: 10px;
+  display: flex;
+  flex-wrap: wrap; /* Pour permettre aux tags de s'ajuster */
+  gap: 5px; /* Espacement entre les tags */
 }
 
-.tag {
-  display: inline-block;
-  background-color: #f0f0f0;
-  padding: 2px 5px;
-  margin-right: 5px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
 </style>
