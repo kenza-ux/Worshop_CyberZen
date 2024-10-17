@@ -22,7 +22,7 @@ const allArticles = [
       { name: 'juridique', theme: true },
       { name: 'secu', theme: true },
       { name: 'anonymat' },
-      { name: 'guide' },
+      { name: 'article' },
     ],
   },
   {
@@ -39,7 +39,7 @@ const allArticles = [
     source: 'https://cyberquiz.com/identity-theft',
     author: 'Michael Lee',
     keywords: ['quiz', 'vol d’identité', 'protection'],
-    categories: [{ name: 'juridique', theme: true }, { name: 'enfant' }, { name: 'quiz' }],
+    categories: [{ name: 'juridique', theme: true }, { name: 'quiz' }, { name: 'enfant' }],
   },
   {
     name: 'Article : Les lois contre l’usurpation d’identité en ligne',
@@ -84,7 +84,7 @@ const allArticles = [
     source: 'https://kidsprivacy.com/identity-protection',
     author: 'Rachel Miller',
     keywords: ['identité', 'enfants', 'protection'],
-    categories: [{ name: 'anonymat', theme: true }, { name: 'enfant' }],
+    categories: [{ name: 'anonymat', theme: true }, { name: 'article' }, { name: 'enfant' }],
   },
   {
     name: 'Comment parler à un adulte si tu es harcelé en ligne',
@@ -100,7 +100,7 @@ const allArticles = [
     source: 'https://schoolguide.com/understanding-cyberbullying',
     author: 'Anna Parker',
     keywords: ['cyberharcèlement', 'conséquences', 'éducation'],
-    categories: [{ name: 'secu', theme: true }, { name: 'guide' }, { name: 'ado' }],
+    categories: [{ name: 'secu', theme: true }, { name: 'article' }, { name: 'ado' }],
   },
   {
     name: 'Prévenir l’addiction aux réseaux sociaux chez les jeunes',
@@ -108,7 +108,7 @@ const allArticles = [
     source: 'https://addictionhelp.com/youth-social-media',
     author: 'Kevin White',
     keywords: ['addiction', 'réseaux sociaux', 'prévention'],
-    categories: [{ name: 'secu', theme: true }, { name: 'guide' }, { name: 'ado' }],
+    categories: [{ name: 'secu', theme: true }, { name: 'article' }, { name: 'ado' }],
   },
   {
     name: 'Les effets des réseaux sociaux sur la santé mentale des adolescents',
@@ -151,99 +151,12 @@ const allArticles = [
     categories: [{ name: 'secu', theme: true }, { name: 'guide' }, { name: 'adulte' }],
   },
   {
-    name: 'La désinformation en ligne : Comment s’en protéger ?',
+    name: 'Quiz: La désinformation en ligne : Comment s’en protéger ?',
     id: 22,
     source: 'https://adulteducation.com/disinformation',
     author: 'Linda Scott',
     keywords: ['désinformation', 'protection', 'adultes'],
-    categories: [{ name: 'secu', theme: true }, { name: 'guide' }, { name: 'adulte' }],
-  },
-];
-const allQuizzes = [
-  {
-    id: 1,
-    articleId: 4,
-    questions: [
-      {
-        question: "Qu'est-ce que le vol d'identité ?",
-        answers: [
-          { index: 1, name: "L'utilisation frauduleuse d'informations personnelles", correct: true },
-          { index: 2, name: "La création d'un faux document" },
-          { index: 3, name: "Le vol d'argent liquide" },
-          { index: 4, name: "L'accès non autorisé à un compte en ligne" },
-        ],
-      },
-      {
-        question: 'Quelle loi protège les données personnelles en Europe ?',
-        answers: [
-          { index: 1, name: 'Loi sur la confiance en ligne' },
-          { index: 2, name: 'Règlement général sur la protection des données (RGPD)', correct: true },
-          { index: 3, name: 'Loi sur la sécurité des informations' },
-          { index: 4, name: 'Loi sur la cybercriminalité' },
-        ],
-      },
-      {
-        question: "Quels sont les droits d'une victime de vol d'identité ?",
-        answers: [
-          { index: 1, name: 'Droit à la réparation' },
-          { index: 2, name: "Droit à l'anonymat", correct: true },
-          { index: 3, name: 'Droit à être informée des mesures prises', correct: true },
-          { index: 4, name: 'Droit à la confidentialité des données', correct: true },
-        ],
-        multi: true,
-      },
-      {
-        question: "Quel est un moyen courant de vol d'identité en ligne ?",
-        answers: [
-          { index: 1, name: 'Le phishing', correct: true },
-          { index: 2, name: "L'usurpation d'identité physique" },
-          { index: 3, name: 'Le spam' },
-          { index: 4, name: 'Le vol de cartes de crédit' },
-        ],
-      },
-      {
-        question: 'Quelles sanctions peuvent être imposées aux entreprises en cas de violation des données ?',
-        answers: [
-          { index: 1, name: "Amendes jusqu'à 4 % du chiffre d'affaires annuel mondial", correct: true },
-          { index: 2, name: 'Retrait de licences commerciales' },
-          { index: 3, name: 'Peines de prison pour les dirigeants' },
-          { index: 4, name: 'Remboursement intégral des clients' },
-        ],
-      },
-      {
-        question: 'Que doit faire une entreprise en cas de violation de données ?',
-        answers: [
-          { index: 1, name: 'Informer les autorités compétentes', correct: true },
-          { index: 2, name: 'Ne rien faire pour éviter la panique' },
-          { index: 3, name: 'Notifier les personnes affectées', correct: true },
-          { index: 4, name: 'Changer tous ses mots de passe' },
-        ],
-        multi: true,
-      },
-      {
-        question: 'Quelle est la principale fonction des organismes de réglementation dans la cybersécurité ?',
-        answers: [
-          { index: 1, name: 'Collecter des données personnelles' },
-          { index: 2, name: 'Établir des normes et surveiller la conformité', correct: true },
-          { index: 3, name: 'Offrir des services de sécurité aux entreprises' },
-          { index: 4, name: 'Sensibiliser le public aux cybermenaces' },
-        ],
-        multi: true,
-      },
-      {
-        question: "Qu'est-ce qu'un faux document d'identité ?",
-        answers: [
-          { index: 1, name: 'Un document officiel' },
-          {
-            index: 2,
-            name: "Un document créé frauduleusement pour usurper l'identité d'une personne",
-            correct: true,
-          },
-          { index: 3, name: 'Un document temporaire pour une procédure légale' },
-          { index: 4, name: "Un document utilisé pour voyager à l'étranger" },
-        ],
-      },
-    ],
+    categories: [{ name: 'secu', theme: true }, { name: 'quiz' }, { name: 'adulte' }],
   },
 ];
 export async function getArticles() {
