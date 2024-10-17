@@ -30,21 +30,11 @@ const showAlerteModal = ref(false);
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
         <!-- Barre de recherche centrée -->
         <form class="d-flex mx-auto" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="saisissez un mot clé"
-            aria-label="search"
-          />
+          <input class="form-control me-2" type="search" placeholder="saisissez un mot clé" aria-label="search" />
           <button class="btn btn-outline-success" type="submit">Chercher</button>
-
         </form>
         <!-- Icone d'alerte à droite -->
         <button @click="showAlerteModal = true" class="navbar-brand">
