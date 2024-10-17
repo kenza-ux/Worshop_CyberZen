@@ -1,6 +1,7 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import { getColor } from '../shared/common.js';
+
 defineProps({ categories: Object });
 
 const scrollContainer = ref(null);
@@ -46,9 +47,11 @@ onMounted(() => {
     <div ref="scrollContainer" class="scroll-container">
       <div class="d-flex flex-row">
         <div v-for="(item, index) in categories" :key="index">
-          <button type="button" class="btn large-category m-4" :class="getColor(item)">
-            <h4>{{ item.name }}</h4>
-          </button>
+          <router-link :to="`/${item.name}`">
+            <button type="button" class="btn large-category m-4" :class="getColor(item)">
+              <h4>{{ item.name }}</h4>
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
