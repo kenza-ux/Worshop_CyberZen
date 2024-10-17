@@ -14,4 +14,9 @@ export default [
     name: 'article',
     component: () => import('@/views/IdvArticleView.vue'),
   },
+  {
+    path: '/guidevideo',
+    name: 'guidevideo',
+    component: () => import('@/components/GuideVideo.vue'), // Ajoute ta route vers le guide vidéo
+  },
 ];

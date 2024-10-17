@@ -24,6 +24,7 @@
   --theme-color-purple: #7e2199;
   --theme-color-dark-purple: #5125ad;
   --theme-color-yellow: #ffc957;
+  --theme-color-orange: #FFA500;
 }
 
 /* semantic color variables for this project */
@@ -121,3 +122,8 @@ body {
   background-color: var(--theme-color-dark-purple) !important;
   color: white !important;
 }
+.orange-button-color {
+  background-color: var(--theme-color-orange) !important; /* Assure-toi d'avoir cette variable définie dans ton CSS */
+  color: white !important;
+}
+
