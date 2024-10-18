@@ -31,7 +31,7 @@ export const getColor = (category) => {
     case 'adulte':
       color = 'dark-purple';
       break;
-    case 'guidevideo': // Nouveau cas ajouté
+    case 'guidevideo':
       color = 'orange';
       break;
     default:

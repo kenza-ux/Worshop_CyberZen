@@ -123,7 +123,7 @@ body {
   color: white !important;
 }
 .orange-button-color {
-  background-color: var(--theme-color-orange) !important; /* Assure-toi d'avoir cette variable définie dans ton CSS */
+  background-color: var(--theme-color-orange) !important;
   color: white !important;
 }
 
