@@ -219,7 +219,7 @@ const allArticles = [
   id: 23,
   source: 'https://www.youtube.com/watch?v=mp6fHqYp3HE',
   author: 'SocialMediaHelp',
-  keywords: ['spam', 'instagram', 'bloquer', 'signalement'],
+  keywords: ['spam', 'instagram', 'bloquer', 'signalement','video'],
   categories: [
     { name: 'guidevideo', theme: true },
     { name: 'guide' },
@@ -230,7 +230,7 @@ const allArticles = [
   id: 24,
   source: 'https://www.youtube.com/watch?v=S0GoTF75jAU',
   author: 'SafeNet',
-  keywords: ['sécurité', 'instagram', 'cyberharcèlement', 'protection'],
+  keywords: ['sécurité', 'instagram', 'cyberharcèlement', 'protection','video'],
   categories: [
     { name: 'guidevideo', theme: true },
     { name: 'secu' },
@@ -241,7 +241,7 @@ const allArticles = [
   id: 25,
   source: 'https://www.youtube.com/watch?v=poHZedjIrlw',
   author: 'CyberSafety',
-  keywords: ['frauduleux', 'signalement', 'facebook', 'sécurité'],
+  keywords: ['frauduleux', 'signalement', 'facebook', 'sécurité', 'video'],
   categories: [
     { name: 'guidevideo', theme: true },
     { name: 'juridique' },
@@ -252,7 +252,7 @@ const allArticles = [
   id: 26,
   source: 'https://www.youtube.com/watch?v=1OKc2Ly_0eA',
   author: 'PrivacyMatters',
-  keywords: ['vie privée', 'twitter', 'protection', 'sécurité'],
+  keywords: ['vie privée', 'twitter', 'protection', 'sécurité', 'video'],
   categories: [
     { name: 'guidevideo', theme: true },
     { name: 'anonymat' },

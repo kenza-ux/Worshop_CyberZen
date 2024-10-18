@@ -9,6 +9,7 @@ const loading = ref(false);
 const articles = ref([]);
 const uniqueCategories = ref([]);
 const selectedCategories = ref([]);
+const searchQuery = ref(''); // Ajout d'une référence pour le terme de recherche
 
 onMounted(async () => {
   loading.value = true;
@@ -16,7 +17,7 @@ onMounted(async () => {
   if (articles.value.length > 0) {
     const categoryMap = articles.value.reduce((acc, article) => {
       article.categories.forEach((category) => {
-        if (category.theme == true) {
+        if (category.theme === true) {
           return;
         }
         acc[category.name] = category;
@@ -27,22 +28,43 @@ onMounted(async () => {
     uniqueCategories.value = Object.values(categoryMap);
     console.log(uniqueCategories.value);
   }
-
   loading.value = false;
 });
 
+// Logique de filtrage des articles par catégories et recherche
 const filteredArticles = computed(() => {
-  if (selectedCategories.value.length === 0) {
-    return articles.value;
+  let filtered = articles.value;
+
+  // Filtrage par catégories sélectionnées
+  if (selectedCategories.value.length > 0) {
+    filtered = filtered.filter((article) =>
+      article.categories.some((category) => selectedCategories.value.includes(category.name))
+    );
   }
-  return articles.value.filter((article) =>
-    article.categories.some((category) => selectedCategories.value.includes(category.name)),
-  );
+
+  // Filtrage par recherche (tags, mots-clés, et titre)
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase();
+    filtered = filtered.filter((article) =>
+      article.name.toLowerCase().includes(query) || // Match avec le titre
+      article.keywords.some((keyword) => keyword.toLowerCase().includes(query)) || // Match avec les mots-clés
+      article.categories.some((category) => category.name.toLowerCase().includes(query)) // Match avec les catégories
+    );
+  }
+
+  return filtered;
 });
+
+// Fonction pour mettre à jour le terme de recherche depuis la Navbar
+const updateSearchQuery = (query) => {
+  searchQuery.value = query; // Mettre à jour la recherche avec la valeur reçue
+};
 </script>
 
 <template>
   <main>
+    <NavBar @search="searchQuery = $event" /> <!-- Écouter l'événement de recherche -->
+
     <div v-if="loading" class="w-100 d-flex justify-content-center">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Chargement...</span>
@@ -76,8 +98,9 @@ const filteredArticles = computed(() => {
           <AllCategoryContent :articles="filteredArticles"></AllCategoryContent>
         </div>
       </div>
-      <div v-else>Aucun contenue disponible</div>
+      <div v-else>Aucun contenu disponible</div>
     </div>
   </main>
 </template>
+
 <style src="@vueform/multiselect/themes/default.css"></style>

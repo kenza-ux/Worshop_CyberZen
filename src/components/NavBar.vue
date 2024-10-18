@@ -1,18 +1,22 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import AlerteButton from './AlerteButton.vue';
 
 const showAlerteModal = ref(false);
+const searchQuery = ref(''); // Référence pour stocker la valeur de l'input
+const emit = defineEmits(['search']); // Définir l'événement 'search'
+
+const onSearch = () => {
+  emit('search', searchQuery.value); // Émettre la valeur de la recherche vers HomeView
+};
 </script>
 
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="container-fluid">
-      <!-- Logo du site-->
       <a class="navbar-brand" href="/">
         <img src="@/assets/cyber.png" alt="Logo" class="logo" />
       </a>
-      <!-- Bouton pour la navigation sur petits écrans -->
       <button
         class="navbar-toggler"
         type="button"
@@ -24,26 +28,24 @@ const showAlerteModal = ref(false);
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Contenu de la navbar -->
       <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-between">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Accueil</a>
           </li>
-
         </ul>
         <!-- Barre de recherche centrée -->
-        <form class="d-flex mx-auto" role="search">
+        <form class="d-flex mx-auto" role="search" @submit.prevent="onSearch"> <!-- Empêche la soumission par défaut -->
           <input
             class="form-control me-2"
             type="search"
             placeholder="saisissez un mot clé"
             aria-label="search"
+            v-model="searchQuery"
+          @input="onSearch"
           />
           <button class="btn btn-outline-success" type="submit">Chercher</button>
-
         </form>
-        <!-- Icone d'alerte à droite -->
         <a @click="showAlerteModal = true" class="navbar-brand alerte-icon">
           <img src="@/assets/logo_alerte.png" alt="Alerte" class="logo" />
         </a>
@@ -52,7 +54,6 @@ const showAlerteModal = ref(false);
         </a>
       </div>
     </div>
-    <!-- Inclusion du composant modal -->
     <AlerteButton v-if="showAlerteModal" @close="showAlerteModal = false" />
   </nav>
 </template>
@@ -62,9 +63,9 @@ const showAlerteModal = ref(false);
 .navbar {
   top: 0;
   left: 0;
-  z-index: 1000; /* Assure que la navbar est devant les autres éléments */
+  z-index: 1000;
   width: 100%;
-  box-shadow: 0 4px 6px rgb(0 0 0 / 10%); /* Optionnel: ajout d'une ombre */
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 }
 
 /* Style pour le logo */
@@ -79,12 +80,12 @@ const showAlerteModal = ref(false);
   margin-right: auto;
   margin-left: auto;
 }
+
 .alerte-icon {
-  cursor: pointer; /* Change le curseur pour montrer que c'est cliquable */
+  cursor: pointer;
 }
 
 .alerte-icon:hover {
-  opacity: 0.8; /* Optionnel : effet visuel quand la souris passe dessus */
+  opacity: 0.8;
 }
-
 </style>
