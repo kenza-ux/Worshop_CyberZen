@@ -214,142 +214,50 @@ const allArticles = [
   { name: 'adulte' },
 ],
 },
-  {
-    name: 'Vidéo Guide : Bloquer ou signaler un spammeur sur Instagram',
-    id: 23,
-    source: 'https://youtube.com/block-spammer-guide',
-    author: 'SocialMediaHelp',
-    keywords: ['spam', 'instagram', 'bloquer', 'signalement'],
-    categories: [
-      { name: 'videoguide', theme: true },
-      { name: 'guide' },
-    ],
-  },
-  {
-    name: 'Vidéo Guide : Sécuriser votre compte Instagram contre les cyberharcèlements',
-    id: 24,
-    source: 'https://youtube.com/security-instagram-guide',
-    author: 'SafeNet',
-    keywords: ['sécurité', 'instagram', 'cyberharcèlement', 'protection'],
-    categories: [
-      { name: 'videoguide', theme: true },
-      { name: 'secu' },
-    ],
-  },
-  {
-    name: 'Vidéo Guide : Comment signaler un compte frauduleux sur Facebook',
-    id: 25,
-    source: 'https://youtube.com/report-fake-account-guide',
-    author: 'CyberSafety',
-    keywords: ['frauduleux', 'signalement', 'facebook', 'sécurité'],
-    categories: [
-      { name: 'videoguide', theme: true },
-      { name: 'juridique' },
-    ],
-  },
-  {
-    name: 'Vidéo Guide : Protéger sa vie privée sur Twitter',
-    id: 26,
-    source: 'https://youtube.com/privacy-twitter-guide',
-    author: 'PrivacyMatters',
-    keywords: ['vie privée', 'twitter', 'protection', 'sécurité'],
-    categories: [
-      { name: 'videoguide', theme: true },
-      { name: 'anonymat' },
-    ],
-  }
-    source: 'https://adulteducation.com/disinformation',
-    author: 'Linda Scott',
-    keywords: ['désinformation', 'protection', 'adultes'],
-    categories: [{ name: 'secu', theme: true }, { name: 'quiz' }, { name: 'adulte' }],
-  },
-];
-
-const allQuizzes = [
-  {
-    id: 1,
-    articleId: 4,
-    questions: [
-      {
-        question: "Qu'est-ce que le vol d'identité ?",
-        answers: [
-          { index: 1, name: "L'utilisation frauduleuse d'informations personnelles", correct: true },
-          { index: 2, name: "La création d'un faux document" },
-          { index: 3, name: "Le vol d'argent liquide" },
-          { index: 4, name: "L'accès non autorisé à un compte en ligne" },
-        ],
-      },
-      {
-        question: 'Quelle loi protège les données personnelles en Europe ?',
-        answers: [
-          { index: 1, name: 'Loi sur la confiance en ligne' },
-          { index: 2, name: 'Règlement général sur la protection des données (RGPD)', correct: true },
-          { index: 3, name: 'Loi sur la sécurité des informations' },
-          { index: 4, name: 'Loi sur la cybercriminalité' },
-        ],
-      },
-      {
-        question: "Quels sont les droits d'une victime de vol d'identité ?",
-        answers: [
-          { index: 1, name: 'Droit à la réparation' },
-          { index: 2, name: "Droit à l'anonymat", correct: true },
-          { index: 3, name: 'Droit à être informée des mesures prises', correct: true },
-          { index: 4, name: 'Droit à la confidentialité des données', correct: true },
-        ],
-        multi: true,
-      },
-      {
-        question: "Quel est un moyen courant de vol d'identité en ligne ?",
-        answers: [
-          { index: 1, name: 'Le phishing', correct: true },
-          { index: 2, name: "L'usurpation d'identité physique" },
-          { index: 3, name: 'Le spam' },
-          { index: 4, name: 'Le vol de cartes de crédit' },
-        ],
-      },
-      {
-        question: 'Quelles sanctions peuvent être imposées aux entreprises en cas de violation des données ?',
-        answers: [
-          { index: 1, name: "Amendes jusqu'à 4 % du chiffre d'affaires annuel mondial", correct: true },
-          { index: 2, name: 'Retrait de licences commerciales' },
-          { index: 3, name: 'Peines de prison pour les dirigeants' },
-          { index: 4, name: 'Remboursement intégral des clients' },
-        ],
-      },
-      {
-        question: 'Que doit faire une entreprise en cas de violation de données ?',
-        answers: [
-          { index: 1, name: 'Informer les autorités compétentes', correct: true },
-          { index: 2, name: 'Ne rien faire pour éviter la panique' },
-          { index: 3, name: 'Notifier les personnes affectées', correct: true },
-          { index: 4, name: 'Changer tous ses mots de passe' },
-        ],
-        multi: true,
-      },
-      {
-        question: 'Quelle est la principale fonction des organismes de réglementation dans la cybersécurité ?',
-        answers: [
-          { index: 1, name: 'Collecter des données personnelles' },
-          { index: 2, name: 'Établir des normes et surveiller la conformité', correct: true },
-          { index: 3, name: 'Offrir des services de sécurité aux entreprises' },
-          { index: 4, name: 'Sensibiliser le public aux cybermenaces' },
-        ],
-      },
-      {
-        question: "Qu'est-ce qu'un faux document d'identité ?",
-        answers: [
-          { index: 1, name: 'Un document officiel' },
-          {
-            index: 2,
-            name: "Un document créé frauduleusement pour usurper l'identité d'une personne",
-            correct: true,
-          },
-          { index: 3, name: 'Un document temporaire pour une procédure légale' },
-          { index: 4, name: "Un document utilisé pour voyager à l'étranger" },
-        ],
-      },
-    ],
-  },
+{
+  name: 'Vidéo Guide : Bloquer ou signaler un spammeur sur Instagram',
+  id: 23,
+  source: 'https://www.youtube.com/watch?v=mp6fHqYp3HE',
+  author: 'SocialMediaHelp',
+  keywords: ['spam', 'instagram', 'bloquer', 'signalement'],
+  categories: [
+    { name: 'guidevideo', theme: true },
+    { name: 'guide' },
+  ],
+},
+{
+  name: 'Vidéo Guide : Sécuriser votre compte Instagram contre les cyberharcèlements',
+  id: 24,
+  source: 'https://www.youtube.com/watch?v=S0GoTF75jAU',
+  author: 'SafeNet',
+  keywords: ['sécurité', 'instagram', 'cyberharcèlement', 'protection'],
+  categories: [
+    { name: 'guidevideo', theme: true },
+    { name: 'secu' },
+  ],
+},
+{
+  name: 'Vidéo Guide : Comment signaler un compte frauduleux sur Facebook',
+  id: 25,
+  source: 'https://www.youtube.com/watch?v=poHZedjIrlw',
+  author: 'CyberSafety',
+  keywords: ['frauduleux', 'signalement', 'facebook', 'sécurité'],
+  categories: [
+    { name: 'guidevideo', theme: true },
+    { name: 'juridique' },
+  ],
+},
+{
+  name: 'Vidéo Guide : Protéger sa vie privée sur Twitter',
+  id: 26,
+  source: 'https://www.youtube.com/watch?v=1OKc2Ly_0eA',
+  author: 'PrivacyMatters',
+  keywords: ['vie privée', 'twitter', 'protection', 'sécurité'],
+  categories: [
+    { name: 'guidevideo', theme: true },
+    { name: 'anonymat' },
+  ],
+}
 ];
 export async function getArticles() {
   return new Promise((resolve) => {

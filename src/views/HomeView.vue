@@ -25,6 +25,7 @@ onMounted(async () => {
     }, {});
 
     uniqueCategories.value = Object.values(categoryMap);
+    console.log(uniqueCategories.value);
   }
 
   loading.value = false;

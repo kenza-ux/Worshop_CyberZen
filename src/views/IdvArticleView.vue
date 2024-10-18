@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import { getArticleById } from '../api/articles';
 import ArticleContent from '@/components/ArticleContent.vue';
 import QuizContent from '@/components/QuizContent.vue';
+import GuideVideo from '@/components/GuideVideo.vue';
 
 const route = useRoute();
 const articleId = ref(null);
@@ -23,7 +24,7 @@ watch(
 );
 
 const getCategoryType = () => {
-  return article.value.categories.find((c) => c.name == 'article' || c.name == 'guide' || c.name == 'quiz').name;
+  return article.value.categories.find((c) => c.name == 'article' || c.name == 'guide' || c.name == 'quiz' || c.name === 'guidevideo').name;
 };
 </script>
 
@@ -43,6 +44,9 @@ const getCategoryType = () => {
       </div>
       <div v-if="categoryType == 'quiz'">
         <QuizContent :article="article"></QuizContent>
+      </div>
+      <div v-if="categoryType === 'guidevideo'">
+        <GuideVideo :article="article"></GuideVideo> <!-- Affichage du composant GuideVideo -->
       </div>
     </div>
     <div v-else class="w-100 pt-4 pb-4">
